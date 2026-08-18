@@ -249,7 +249,7 @@ const toneQuestions = {
     "¿Qué pasaría si asumieras que el origen está íntegramente en vos?",
     "¿Quién o qué pierde poder si dejás de culpar?",
     "¿Qué elegís hacer hoy con la parte que sí depende de vos?",
-    "¿Dónde dejaste el mando de tu atención?",
+    "¿Dónde dejás el mando de tu atención?",
     "¿Qué mentira contás para no actuar?",
   ],
   intellectualization: [

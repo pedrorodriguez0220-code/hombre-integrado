@@ -148,7 +148,7 @@ export default function Home() {
                 <summary className="cursor-pointer list-none flex justify-between items-start gap-4">
                   <div className="space-y-1">
                     <p className="text-xs tracking-[0.2em] uppercase text-[#666]">
-                      {entry.dimension} — <span className="text-[#777]">{entry.type}</span>
+                      {entry.type}
                     </p>
                     <p className="text-sm font-light text-[#999] line-clamp-1">
                       {entry.question}

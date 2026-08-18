@@ -43,16 +43,37 @@ const tonePrefixTemplates = {
     "En {ctx}, el ego externaliza la causa para no cargar con el peso.",
     "En {ctx}, buscás una coartada antes de asumir la responsabilidad.",
     "En {ctx}, el relato culpa al entorno mientras el poder se escapa.",
+    "En {ctx}, la excusa es la defensa favorita del que aún no acepta su centro.",
+    "En {ctx}, cada 'porque' es un cable que delega tu poder a factores ajenos.",
+    "En {ctx}, decir que no depende de vos es elegir la impotencia como refugio.",
+    "En {ctx}, el entorno no se mueve hasta que vos dejás de esperar su permiso.",
+    "En {ctx}, la culpa compartida con el sistema es responsabilidad negada.",
+    "En {ctx}, justificar es construir una celda con las palabras 'no pude'.",
+    "En {ctx}, la circunstancia solo revela dónde aún no te has hecho cargo.",
   ],
   intellectualization: [
     "En {ctx}, la mente confunde el mapa con el territorio.",
     "En {ctx}, los conceptos abstractos armaron una muralla alrededor de la herida.",
     "En {ctx}, explicar se volvió estrategia para no sentir.",
+    "En {ctx}, la teoría se erige como túnel por donde huir del territorio del cuerpo.",
+    "En {ctx}, nombrar el trauma con palabras ricas no lo disuelve; lo distrae.",
+    "En {ctx}, el intelecto ordena para no dejarse desordenar por lo real.",
+    "En {ctx}, cada concepto que agregás es otra capa que separa la mirada del hecho.",
+    "En {ctx}, filosofar sobre el dolor es una forma elegante de no tocarlo.",
+    "En {ctx}, el análisis infinito es el ruido que la herida pone para no ser sentida.",
+    "En {ctx}, dejá el mapa. El territorio te espera sin títulos ni citas.",
   ],
   martyr: [
     "En {ctx}, el ego se cobra con sufrimiento exhibido.",
     "En {ctx}, el sacrificio exige un aplauso invisible.",
     "En {ctx}, la víctima se viste de héroe para sobrevivir.",
+    "En {ctx}, el dolor presentado como moneda es negocio, no consciencia.",
+    "En {ctx}, cargar con todo es una forma secreta de exigir reconocimiento.",
+    "En {ctx}, el mártir paga con sufrimiento para cobrar atención.",
+    "En {ctx}, decir 'nadie nota' es confirmar que el sufrimiento busca testigo.",
+    "En {ctx}, el sacrificio gratuito no existe; siempre hay un precio emocional.",
+    "En {ctx}, el peso que elegís llevar solo para que vean es un yugo invisible.",
+    "En {ctx}, la víctima se coloca en el centro esperando que el mundo le devuelva su dolor.",
   ],
 };
 
@@ -216,6 +237,11 @@ const defaultPool = [
   "La mente busca conclusiones rápidas para calmar la incomodidad. Rompé el ciclo: observá tu respuesta sin absolverte ni condenarte.",
   "Ninguna IA puede resolver lo que solo el observador interno debe presenciar. Permanece con lo que acabas de escribir durante diez segundos sin moverte.",
   "El espejo no tiene opinión; solo devuelve lo que le entregás. ¿Qué hacés ahora con lo que viste?",
+  "La pregunta que evitás contiene la respuesta que el espejo guarda. Mirala sin traducirla.",
+  "Ninguna explicación externa reemplaza el acto de sostener lo que sentís.",
+  "El espejo no juzga; solo refleja. ¿Qué hacés con lo que ahora ves?",
+  "Lo que escribiste es un punto de partida, no una sentencia. Observalo sin huir.",
+  "La verdad que entregaste no necesita ser arreglada; necesita ser presenciada.",
 ];
 
 const superficialPool = [
@@ -224,6 +250,11 @@ const superficialPool = [
   "El silencio es sabio, pero el tuyo ahora es evasión. Escribí lo que tu mente calla por vergüenza.",
   "Esa frase apretada es una puerta que querés dejar cerrada. Empujala: ¿qué hay al otro lado?",
   "Huir del lenguaje no te libera. Nombrá el hecho con la crudeza que merece.",
+  "La respuesta corta es una máscara. ¿Qué hay detrás de ella?",
+  "El espejo no acepta monedas de cobre por oro. Entregá lo que pesa.",
+  "Dos palabras no nombran un mundo. Extendé la mano hacia lo incómodo.",
+  "Cada palabra que omitís es una sombra que se queda sin luz. Escribila.",
+  "No hay prisa. El espejo puede esperar, pero tu evasión no se esconde.",
 ];
 
 const tonePatterns = {

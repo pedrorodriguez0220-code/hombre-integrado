@@ -1,8 +1,8 @@
 export function analyzeUserResponse(inputText) {
   const text = inputText.toLowerCase().trim();
-  const wordCount = text.split(/\s+/).length;
+  const words = text.split(/\s+/);
+  const wordCount = words.length;
 
-  // Banco de respuestas dinámicas basadas en la doctrina de El Hombre Integrado
   const responses = {
     justification: [
       "Observa el mecanismo. El ego externaliza la causa para no asumir el poder. ¿Qué responsabilidad estás intentando delegar para protegerte?",
@@ -25,43 +25,31 @@ export function analyzeUserResponse(inputText) {
       "El silencio es sabio, pero el tuyo ahora es evasión. Escribe lo que tu mente calla por vergüenza.",
     ],
     neutral: [
-      "El conocimiento sin observación es solo acumulación de ruido. Sostén esta verdad en silencio: ¿puedes aceptar este fragmento de tu sombra sin justificarlo?",
+      "El conocimiento sin observación es solo acumulación de ruido. Sostén esta verdad en silencio: ¿puedes aceptar este fragmento de tu sombra sin juzgarlo ni justificarlo?",
       "Has puesto tu verdad sobre la mesa. Mírala sin intentar corregirla, sin juzgarla, sin absolverla. ¿Qué te devuelve el reflejo?",
       "Ninguna IA puede resolver lo que solo el observador interno debe presenciar. Permanece con lo que acabas de escribir durante diez segundos sin moverte.",
+      "La mente busca conclusiones rápidas para calmar la incomodidad. Rompe el ciclo: observa tu respuesta sin absolverte ni condenarte.",
     ],
   };
 
   const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-  if (wordCount < 10) {
-    return { type: "SUPERFICIAL", response: getRandom(responses.superficial) };
-  }
-  if (
-    text.includes("culpa") ||
-    text.includes("porque") ||
-    text.includes("otros") ||
-    text.includes("sistema") ||
-    text.includes("fueron")
-  ) {
+  // PRIORIDAD 1: Detectar patrones estructurales de defensa del ego (antes de medir longitud)
+  if (/(culpa|porque|otros|sistema|fueron|nadie me entiende|por su culpa)/i.test(text)) {
     return { type: "JUSTIFICATION", response: getRandom(responses.justification) };
   }
-  if (
-    text.includes("teoría") ||
-    text.includes("analizo") ||
-    text.includes("mental") ||
-    text.includes("concepto")
-  ) {
+  if (/(teoría|analizando|sicológicamente|mental|concepto|filosóficamente)/i.test(text)) {
     return { type: "INTELLECTUALIZATION", response: getRandom(responses.intellectualization) };
   }
-  if (
-    text.includes("siempre") ||
-    text.includes("nadie") ||
-    text.includes("todo") ||
-    text.includes("sólo yo") ||
-    text.includes("sacrificio")
-  ) {
+  if (/(siempre|nunca|mártir|sacrificio|nadie valora|fui el único)/i.test(text)) {
     return { type: "MARTYR", response: getRandom(responses.martyr) };
   }
 
+  // PRIORIDAD 2: Solo si el texto es extremadamente corto (menos de 4 palabras), activar superficial
+  if (wordCount < 4) {
+    return { type: "SUPERFICIAL", response: getRandom(responses.superficial) };
+  }
+
+  // PRIORIDAD 3: Devolución profunda por defecto (rotando entre múltiples opciones neutrales)
   return { type: "NEUTRAL", response: getRandom(responses.neutral) };
 }

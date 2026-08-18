@@ -110,7 +110,7 @@ export default function Home() {
           </div>
         )}
 
-        {feedback && <MirrorFeedback feedback={feedback} onNext={nextQuestion} />}
+        {feedback && <MirrorFeedback answer={answer} feedback={feedback} onNext={nextQuestion} />}
       </section>
     </main>
   );

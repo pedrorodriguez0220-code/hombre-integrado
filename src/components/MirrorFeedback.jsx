@@ -3,7 +3,7 @@ export default function MirrorFeedback({ answer, feedback, onNext }) {
     <div className="space-y-8 border border-[#222] p-8 bg-[#0d0d0d]">
       <div className="space-y-4">
         <p className="text-xs tracking-[0.25em] uppercase text-[#666]">
-          Tu entrega al espejo
+          Tu reflejo entregado
         </p>
         <blockquote className="text-base font-light leading-relaxed text-[#b0b0b0] border-l border-[#444] pl-4 italic">
           {answer}

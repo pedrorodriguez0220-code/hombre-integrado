@@ -1,0 +1,178 @@
+export const QUESTIONS_DATABASE = [
+  // --- DIMENSIÓN I: EL RUIDO Y LA ATENCIÓN (1 a 12)
+  { id: 1, dimension: "El Ruido", text: "¿Sos vos cuando nadie te está mirando?" },
+  { id: 2, dimension: "El Ruido", text: "¿Qué estímulo digital de hoy consumiste solo para escapar del silencio?" },
+  { id: 3, dimension: "El Ruido", text: "¿Cuántas horas pasaste reaccionando a urgencias ajenas que no dependían de vos?" },
+  { id: 4, dimension: "El Ruido", text: "Describe el sonido predominante en tu mente en este preciso instante: ¿es tuyo o fue instalado por el entorno?" },
+  { id: 5, dimension: "El Ruido", text: "¿Qué conversación postergaste hoy por miedo al vacío que genera la verdad?" },
+  { id: 6, dimension: "El Ruido", text: "Identifica un momento del día en que tu velocidad mental reemplazó a tu presencia." },
+  { id: 7, dimension: "El Ruido", text: "¿Qué notificación esperabas ansiosamente y qué dice eso de tu necesidad de validación?" },
+  { id: 8, dimension: "El Ruido", text: "Si apagaras todas las pantallas durante 24 horas, ¿qué parte de tu identidad colapsaría primero?" },
+  { id: 9, dimension: "El Ruido", text: "¿En qué área de tu vida usas el 'estar ocupado' como un anestésico emocional?" },
+  { id: 10, dimension: "El Ruido", text: "Observa tu respiración actual: ¿es corta de supervivencia o profunda de arraigo?" },
+  { id: 11, dimension: "El Ruido", text: "¿Qué opinión emitiste hoy sin que te fuera solicitada, solo por el impulso de ocupar espacio?" },
+  { id: 12, dimension: "El Ruido", text: "El ruido externo cesa cuando el observador deja de alimentarlo. ¿Qué estímulo dejarás hoy de alimentar?" },
+
+  // --- DIMENSIÓN II: LA AUTOCONSCIENCIA Y EL ESPEJO (13 a 24)
+  { id: 13, dimension: "Autoconsciencia", text: "Describe con absoluta crudeza lo que hiciste anoche. ¿Qué parte intentas ocultar al recordarlo?" },
+  { id: 14, dimension: "Autoconsciencia", text: "¿Qué defecto criticaste hoy en otro que en realidad domina tus propias acciones?" },
+  { id: 15, dimension: "Autoconsciencia", text: "¿Qué máscara social usaste esta mañana para que el mundo te aprobara sin fricción?" },
+  { id: 16, dimension: "Autoconsciencia", text: "Identifica el pensamiento recurrente que te redujo la energía vital en las últimas 48 horas." },
+  { id: 17, dimension: "Autoconsciencia", text: "¿Qué verdad sobre tu pasado sigues disfrazando de anécdota heroica?" },
+  { id: 18, dimension: "Autoconsciencia", text: "Mírate al espejo sin juzgarte: ¿a quién le pertenece realmente la mirada que devuelve el reflejo?" },
+  { id: 19, dimension: "Autoconsciencia", text: "¿Qué emoción reprimiste hoy por considerarla 'inadecuada' para tu personaje?" },
+  { id: 20, dimension: "Autoconsciencia", text: "¿Cuál es el límite exacto entre lo que crees que sos y lo que los demás esperan que seas?" },
+  { id: 21, dimension: "Autoconsciencia", text: "Nombra un miedo pequeño que hoy guio una decisión grande sin que te dieras cuenta." },
+  { id: 22, dimension: "Autoconsciencia", text: "¿Qué culpa arrastras que ya perdió vigencia pero mantienes viva por costumbre?" },
+  { id: 23, dimension: "Autoconsciencia", text: "¿En qué momento exacto de hoy perdiste la soberanía sobre tus propias emociones?" },
+  { id: 24, dimension: "Autoconsciencia", text: "El ego se disfraza de luz. ¿Qué aspecto de tu 'espiritualidad' esconde soberbia?" },
+
+  // --- DIMENSIÓN III: EL CUERPO Y EL ARRAIGO (25 a 36)
+  { id: 25, dimension: "El Cuerpo y el Arraigo", text: "¿Dónde habitas realmente: en el pecho o en la cabeza?" },
+  { id: 26, dimension: "El Cuerpo y el Arraigo", text: "¿Qué parte de tu cuerpo sostiene una tensión que no has querido escuchar?" },
+  { id: 27, dimension: "El Cuerpo y el Arraigo", text: "Si tu cuerpo hablara con honestidad, ¿qué mentira tuya desmentiría primero?" },
+  { id: 28, dimension: "El Cuerpo y el Arraigo", text: "¿Cuándo fue la última vez que sentiste el suelo bajo tus pies sin apresurarte?" },
+  { id: 29, dimension: "El Cuerpo y el Arraigo", text: "¿Qué ritual cotidiano usas para no sentir el peso de estar vivo?" },
+  { id: 30, dimension: "El Cuerpo y el Arraigo", text: "Describe la sensación física de la vergüenza en tu cuerpo. ¿La has aprendido a nombrar?" },
+  { id: 31, dimension: "El Cuerpo y el Arraigo", text: "¿Cómo traicionaste a tu cuerpo hoy para mantener una imagen, un horario o una obligación?" },
+  { id: 32, dimension: "El Cuerpo y el Arraigo", text: "¿Qué emoción estás almacenando en los hombros, la mandíbula o el estómago?" },
+  { id: 33, dimension: "El Cuerpo y el Arraigo", text: "Si el ritmo de tu respiración dictara tu velocidad vital, ¿qué dejarías de perseguir?" },
+  { id: 34, dimension: "El Cuerpo y el Arraigo", text: "¿En qué momento del día tu cuerpo pidió descanso y tú le ordenaste continuar?" },
+  { id: 35, dimension: "El Cuerpo y el Arraigo", text: "¿Qué sensación física evitas porque sabe demasiado a verdad?" },
+  { id: 36, dimension: "El Cuerpo y el Arraigo", text: "El cuerpo no miente. ¿Qué verdad tuya ha estado anunciando con dolencias o agotamiento?" },
+
+  // --- DIMENSIÓN IV: LA SOMBRA Y EL DEMONIO INTERNO (37 a 48)
+  { id: 37, dimension: "La Sombra", text: "¿Qué deseo tuyo considerás 'inaceptable' y por eso lo vigilás con más ferocidad?" },
+  { id: 38, dimension: "La Sombra", text: "Nombrá una cualidad tuya que jamás mostrás en público por temor al rechazo." },
+  { id: 39, dimension: "La Sombra", text: "¿Qué parte de tu oscuridad proyectás sobre los demás para no reconocerla en vos?" },
+  { id: 40, dimension: "La Sombra", text: "Si tus celos, envidias o rencores hablaran a plena voz, ¿qué confesarían?" },
+  { id: 41, dimension: "La Sombra", text: "¿Qué comportamiento tuyo negás rotundamente aunque otros lo hayan observado en vos?" },
+  { id: 42, dimension: "La Sombra", text: "¿A quién odiás en secreto y qué espejo de tu propia carencia representa?" },
+  { id: 43, dimension: "La Sombra", text: "¿Qué fantasía oculta nutre tu ego cuando nadie observa?" },
+  { id: 44, dimension: "La Sombra", text: "¿Cuál es la culpa que más trabajo te da ocultar, incluso ante vos mismo?" },
+  { id: 45, dimension: "La Sombra", text: "¿Qué herida no sanada usás como excusa para repetir el mismo patrón?" },
+  { id: 46, dimension: "La Sombra", text: "Si tu sombra fuera una persona, ¿qué ropa llevaría puesta y qué le dirías?" },
+  { id: 47, dimension: "La Sombra", text: "¿Qué parte de vos sentís alivio al negar porque todavía te da miedo integrarla?" },
+  { id: 48, dimension: "La Sombra", text: "La sombra no se combate: se ilumina. ¿Qué rincón tuyo estás dispuesto a mirar hoy?" },
+
+  // --- DIMENSIÓN V: LAS RELACIONES Y EL ESPEJO AJENO (49 a 60)
+  { id: 49, dimension: "Las Relaciones", text: "¿Qué relación mantenés por inercia, temor a la soledad o imagen social?" },
+  { id: 50, dimension: "Las Relaciones", text: "¿Qué esperás calladamente que otro haga por vos sin que jamás se lo pidas?" },
+  { id: 51, dimension: "Las Relaciones", text: "¿A quién usás como espejo para validar quién creés ser?" },
+  { id: 52, dimension: "Las Relaciones", text: "¿Qué vínculo de tu vida se sostiene sobre acuerdos no dichos y resentimientos callados?" },
+  { id: 53, dimension: "Las Relaciones", text: "¿Cuándo lastimaste a alguien por miedo a ser vulnerable primero?" },
+  { id: 54, dimension: "Las Relaciones", text: "¿Qué necesidad infantil intentás satisfacer con personas que no pueden darte eso?" },
+  { id: 55, dimension: "Las Relaciones", text: "¿A quién convertiste en villano para no reconocer tu propia sombra?" },
+  { id: 56, dimension: "Las Relaciones", text: "¿Qué vínculo terminó hace tiempo pero seguís recreando emocionalmente?" },
+  { id: 57, dimension: "Las Relaciones", text: "¿Qué relación alimentás solo porque te hace sentir necesario o indispensable?" },
+  { id: 58, dimension: "Las Relaciones", text: "¿Con quién tenés pendiente una verdad que postergás para no perder comodidad?" },
+  { id: 59, dimension: "Las Relaciones", text: "¿Qué expectativa secreta depositás en los demás que jamás les revelaste?" },
+  { id: 60, dimension: "Las Relaciones", text: "El otro no es tu salvación. ¿Qué te enseña hoy tu relación más conflictiva sobre vos?" },
+
+  // --- DIMENSIÓN VI: EL PODER PERSONAL SIN CULPA (61 a 72)
+  { id: 61, dimension: "El Poder Personal", text: "¿Dónde delegaste tu poder esta semana para no cargar con la responsabilidad?" },
+  { id: 62, dimension: "El Poder Personal", text: "¿Qué decisión estás evitando porque su consecuencia te obligaría a crecer?" },
+  { id: 63, dimension: "El Poder Personal", text: "¿Qué miedo disfraza tu indecisión de prudencia?" },
+  { id: 64, dimension: "El Poder Personal", text: "¿En qué área de tu vida pedís permiso para existir?" },
+  { id: 65, dimension: "El Poder Personal", text: "¿Qué acción pospusiste hoy porque esperabas que alguien más diera el primer paso?" },
+  { id: 66, dimension: "El Poder Personal", text: "¿Qué creencia heredada limita tu capacidad de actuar con soberanía?" },
+  { id: 67, dimension: "El Poder Personal", text: "¿Cuándo confundiste la humildad con la sumisión?" },
+  { id: 68, dimension: "El Poder Personal", text: "¿Qué conflicto evitás para no arriesgar tu imagen de 'buena persona'?" },
+  { id: 69, dimension: "El Poder Personal", text: "¿Qué parte de tu vida funciona en piloto automático porque te da miedo tomar el timón?" },
+  { id: 70, dimension: "El Poder Personal", text: "¿A quién le entregaste el derecho de definir lo que sos capaz?" },
+  { id: 71, dimension: "El Poder Personal", text: "¿Qué 'no puedo' de tu vocabulario es en realidad un 'no quiero asumir'?" },
+  { id: 72, dimension: "El Poder Personal", text: "El poder no es dominio sobre otros. ¿Cómo ejercés dominio sobre vos mismo?" },
+
+  // --- DIMENSIÓN VII: LA ESTRUCTURA DEL DINERO Y EL VALOR (73 a 84)
+  { id: 73, dimension: "El Dinero y el Valor", text: "¿Qué precio pagás realmente por el dinero que ganás?" },
+  { id: 74, dimension: "El Dinero y el Valor", text: "¿Cuánto de tu identidad está atado a lo que poseés o produces?" },
+  { id: 75, dimension: "El Dinero y el Valor", text: "¿Qué compraste recientemente para llenar un vacío que no tiene forma material?" },
+  { id: 76, dimension: "El Dinero y el Valor", text: "¿Qué servicio o talento tuyo subvalorás por miedo a cobrar lo que vale?" },
+  { id: 77, dimension: "El Dinero y el Valor", text: "¿El dinero que perseguís es un medio o se convirtió en tu única medida de éxito?" },
+  { id: 78, dimension: "El Dinero y el Valor", text: "¿Qué herida de escasez heredaste y sigues repitiendo en tu adultez?" },
+  { id: 79, dimension: "El Dinero y el Valor", text: "¿Qué gasto innecesario realizaste para sostener una imagen que no te pertenece?" },
+  { id: 80, dimension: "El Dinero y el Valor", text: "¿Dónde confundiste el valor propio con el precio que cobrás o el salario que recibís?" },
+  { id: 81, dimension: "El Dinero y el Valor", text: "¿Qué dinero aceptás ganar que te aleja de quien querés ser?" },
+  { id: 82, dimension: "El Dinero y el Valor", text: "¿Qué relación tenés con la abundancia: la atraés, la temés o la evitás?" },
+  { id: 83, dimension: "El Dinero y el Valor", text: "¿Cuánto de tu tiempo vale menos de lo que crees y por qué lo regalas así?" },
+  { id: 84, dimension: "El Dinero y el Valor", text: "El dinero es energía hecha estructura. ¿Qué energía tuya monetizás y qué parte negás?" },
+
+  // --- DIMENSIÓN VIII: EL SILENCIO Y LA CONTEMPLACIÓN (85 a 96)
+  { id: 85, dimension: "El Silencio", text: "¿Cuándo fue la última vez que estuviste en silencio sin buscar nada?" },
+  { id: 86, dimension: "El Silencio", text: "¿Qué pensamiento te asusta encontrar si dejás de huir del vacío?" },
+  { id: 87, dimension: "El Silencio", text: "¿Cuánto tiempo podés estar solo antes de encender un dispositivo?" },
+  { id: 88, dimension: "El Silencio", text: "¿Qué sensación surge cuando dejás de hacer y solo estás?" },
+  { id: 89, dimension: "El Silencio", text: "¿Qué pregunta evitás hacer en silencio porque ya sabés la respuesta?" },
+  { id: 90, dimension: "El Silencio", text: "¿Cómo llenás los huecos del día para no escuchar lo que hay debajo?" },
+  { id: 91, dimension: "El Silencio", text: "¿Qué verdad emerge cuando dejás de defender tu historia?" },
+  { id: 92, dimension: "El Silencio", text: "¿Qué parte de vos solo aparece en la quietud y raramente dejás salir?" },
+  { id: 93, dimension: "El Silencio", text: "¿Cuándo sentís que el silencio te juzga y cuándo te abraza?" },
+  { id: 94, dimension: "El Silencio", text: "¿Qué conversación interior repetís para no quedarte en paz?" },
+  { id: 95, dimension: "El Silencio", text: "¿Qué miedo al aburrimiento te impide sostener la contemplación?" },
+  { id: 96, dimension: "El Silencio", text: "En el silencio no hay nada que conquistar. ¿Podés quedarte aquí sin exigirte nada?" },
+
+  // --- DIMENSIÓN IX: LA DISCIPLINA SIN VIOLENCIA (97 a 108)
+  { id: 97, dimension: "La Disciplina", text: "¿Qué hábito sostenés por castigo en vez de por elección?" },
+  { id: 98, dimension: "La Disciplina", text: "¿Qué parte de tu disciplina es solo una forma sofisticada de autoflagelación?" },
+  { id: 99, dimension: "La Disciplina", text: "¿Qué compromiso contigo mismo rompiste esta semana sin siquiera nombrarlo?" },
+  { id: 100, dimension: "La Disciplina", text: "¿Cuándo confundiste la rigidez con la fuerza de voluntad?" },
+  { id: 101, dimension: "La Disciplina", text: "¿Qué práctica saludable abandonaste porque no te dio resultados rápidos?" },
+  { id: 102, dimension: "La Disciplina", text: "¿Cómo castigás tu cuerpo o mente para compensar una falta real o imaginaria?" },
+  { id: 103, dimension: "La Disciplina", text: "¿Qué estructura diaria te sostiene y cuál te oprime?" },
+  { id: 104, dimension: "La Disciplina", text: "¿En qué área de tu vida sos permisivo donde deberías ser firme?" },
+  { id: 105, dimension: "La Disciplina", text: "¿Qué hábito fingís tener para que otros te vean disciplinado?" },
+  { id: 106, dimension: "La Disciplina", text: "¿Qué te enseñó una recaída reciente sobre la verdadera constancia?" },
+  { id: 107, dimension: "La Disciplina", text: "¿Cómo distinguís entre descanso merecido y escape cómodo?" },
+  { id: 108, dimension: "La Disciplina", text: "La disciplina verdadera no exige odio. ¿Podés amar la dirección que elegís?" },
+
+  // --- DIMENSIÓN X: EL LIDERAZGO Y EL EJEMPLO (109 a 120)
+  { id: 109, dimension: "El Liderazgo", text: "¿Quién te observa y qué ejemplo le estás dando sin palabras?" },
+  { id: 110, dimension: "El Liderazgo", text: "¿Cuándo exigís en otros lo que aún no dominás en vos?" },
+  { id: 111, dimension: "El Liderazgo", text: "¿Qué tipo de líder sos cuando nadie te elogia por ello?" },
+  { id: 112, dimension: "El Liderazgo", text: "¿Qué herencia emocional o ética dejás en quienes te rodean?" },
+  { id: 113, dimension: "El Liderazgo", text: "¿En qué área de tu vida pedís autoridad sin haber ejercido responsabilidad?" },
+  { id: 114, dimension: "El Liderazgo", text: "¿Qué decisión difícil evitás tomar porque te haría impopular?" },
+  { id: 115, dimension: "El Liderazgo", text: "¿Cómo inspirás a otros: con palabras o con la coherencia de tu vida?" },
+  { id: 116, dimension: "El Liderazgo", text: "¿A quién estás formando con tu silencio, tu impaciencia o tu ejemplo?" },
+  { id: 117, dimension: "El Liderazgo", text: "¿Qué poder ejercés sobre otros sin nombrarlo ni cuestionarlo?" },
+  { id: 118, dimension: "El Liderazgo", text: "¿Qué falla tuya estás enseñando a justificar sin darte cuenta?" },
+  { id: 119, dimension: "El Liderazgo", text: "¿Qué legado estás construyendo con las decisiones que tomas hoy?" },
+  { id: 120, dimension: "El Liderazgo", text: "El verdadero liderazgo no necesita seguidores. ¿Quién sos cuando nadie te sigue?" },
+
+  // --- DIMENSIÓN XI: LA MUERTE DE LAS EXPECTATIVAS (121 a 132)
+  { id: 121, dimension: "Las Expectativas", text: "¿Qué vida esperaban otros de vos y cuánto de eso todavía cargás?" },
+  { id: 122, dimension: "Las Expectativas", text: "¿Qué expectativa tenés de ti mismo que te paraliza antes de empezar?" },
+  { id: 123, dimension: "Las Expectativas", text: "¿A quién castigás por no cumplir lo que nunca le pediste abiertamente?" },
+  { id: 124, dimension: "Las Expectativas", text: "¿Qué versión tuya estás agotado de sostener para que nadie se decepcione?" },
+  { id: 125, dimension: "Las Expectativas", text: "¿Qué futuro imaginario usás para evitar el presente?" },
+  { id: 126, dimension: "Las Expectativas", text: "¿Cuándo una expectativa se convirtió en prisión y en qué momento dejarás de alimentarla?" },
+  { id: 127, dimension: "Las Expectativas", text: "¿Qué fracaso temido sigues repitiendo en tu mente para justificar no intentar?" },
+  { id: 128, dimension: "Las Expectativas", text: "¿Qué relación dañaste por exigirle que cumpla un guion inexistente?" },
+  { id: 129, dimension: "Las Expectativas", text: "¿Qué parte de tu felicidad depende de que algo externo salga como imaginaste?" },
+  { id: 130, dimension: "Las Expectativas", text: "¿Cuánto de tu sufrimiento viene de confundir deseo con expectativa?" },
+  { id: 131, dimension: "Las Expectativas", text: "¿Qué promesa de futuro te roba la atención del hoy?" },
+  { id: 132, dimension: "Las Expectativas", text: "La expectativa es una deuda que nadie te debe. ¿A quién le perdonarías hoy de deber?" },
+
+  // --- DIMENSIÓN XII: LA INTEGRACIÓN FINAL (133 a 144)
+  { id: 133, dimension: "La Integración Final", text: "¿Qué parte de tu oscuridad podés abrazar hoy sin justificarla ni condenarla?" },
+  { id: 134, dimension: "La Integración Final", text: "¿Quién sos cuando no estás intentando ser mejor que nadie?" },
+  { id: 135, dimension: "La Integración Final", text: "¿Qué verdad pequeña estás dispuesto a vivir aunque nadie te aplauda?" },
+  { id: 136, dimension: "La Integración Final", text: "¿Cómo se siente ser completo: con luz, sombra, ruido y silencio incluidos?" },
+  { id: 137, dimension: "La Integración Final", text: "¿Qué guerra interna declarás terminada hoy?" },
+  { id: 138, dimension: "La Integración Final", text: "¿Qué vas a dejar de fingir para poder empezar a ser?" },
+  { id: 139, dimension: "La Integración Final", text: "¿Cuál es la acción más pequeña que representa tu integridad real?" },
+  { id: 140, dimension: "La Integración Final", text: "¿Podés aceptar que serás un eterno trabajo en progreso sin usar eso como excusa?" },
+  { id: 141, dimension: "La Integración Final", text: "¿Qué fragmento tuyo se niega a volver si no recibe perdón?" },
+  { id: 142, dimension: "La Integración Final", text: "¿Cómo honrarías tu vida si supieras que cada día es una elección consciente?" },
+  { id: 143, dimension: "La Integración Final", text: "¿Qué promesa te hacés a vos mismo que esta vez no vas a traicionar?" },
+  { id: 144, dimension: "La Integración Final", text: "El hombre integrado no es el que ya no sufre: es el que ya no huye de su propio espejo. ¿Qué ves hoy?" },
+];
+
+export function getRandomQuestion() {
+  const index = Math.floor(Math.random() * QUESTIONS_DATABASE.length);
+  return QUESTIONS_DATABASE[index];
+}
+
+export function getQuestionById(id) {
+  return QUESTIONS_DATABASE.find((q) => q.id === id) || null;
+}

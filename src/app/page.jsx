@@ -51,7 +51,7 @@ export default function Home() {
     setFeedback(null);
 
     setTimeout(() => {
-      const result = analyzeUserResponse(answer);
+      const result = analyzeUserResponse(question.dimension, question.text, answer);
       setFeedback(result);
       setAnalyzing(false);
       saveSession(result);

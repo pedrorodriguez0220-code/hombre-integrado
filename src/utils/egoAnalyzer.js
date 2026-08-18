@@ -1,16 +1,3 @@
-const lastResponseIndex = new Map();
-
-function pickResponse(arr, type) {
-  if (arr.length <= 1) return arr[0];
-  const lastIndex = lastResponseIndex.get(type);
-  let index;
-  do {
-    index = Math.floor(Math.random() * arr.length);
-  } while (arr.length > 1 && index === lastIndex);
-  lastResponseIndex.set(type, index);
-  return arr[index];
-}
-
 function removeAccents(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
@@ -37,225 +24,6 @@ const dimensionContext = {
   "LAS EXPECTATIVAS": "las expectativas",
   "LA INTEGRACION FINAL": "la integración final",
 };
-
-const tonePrefixTemplates = {
-  justification: [
-    "En {ctx}, el ego externaliza la causa para no cargar con el peso.",
-    "En {ctx}, buscás una coartada antes de asumir la responsabilidad.",
-    "En {ctx}, el relato culpa al entorno mientras el poder se escapa.",
-    "En {ctx}, la excusa es la defensa favorita del que aún no acepta su centro.",
-    "En {ctx}, cada 'porque' es un cable que delega tu poder a factores ajenos.",
-    "En {ctx}, decir que no depende de vos es elegir la impotencia como refugio.",
-    "En {ctx}, el entorno no se mueve hasta que vos dejás de esperar su permiso.",
-    "En {ctx}, la culpa compartida con el sistema es responsabilidad negada.",
-    "En {ctx}, justificar es construir una celda con las palabras 'no pude'.",
-    "En {ctx}, la circunstancia solo revela dónde aún no te has hecho cargo.",
-  ],
-  intellectualization: [
-    "En {ctx}, la mente confunde el mapa con el territorio.",
-    "En {ctx}, los conceptos abstractos armaron una muralla alrededor de la herida.",
-    "En {ctx}, explicar se volvió estrategia para no sentir.",
-    "En {ctx}, la teoría se erige como túnel por donde huir del territorio del cuerpo.",
-    "En {ctx}, nombrar el trauma con palabras ricas no lo disuelve; lo distrae.",
-    "En {ctx}, el intelecto ordena para no dejarse desordenar por lo real.",
-    "En {ctx}, cada concepto que agregás es otra capa que separa la mirada del hecho.",
-    "En {ctx}, filosofar sobre el dolor es una forma elegante de no tocarlo.",
-    "En {ctx}, el análisis infinito es el ruido que la herida pone para no ser sentida.",
-    "En {ctx}, dejá el mapa. El territorio te espera sin títulos ni citas.",
-  ],
-  martyr: [
-    "En {ctx}, el ego se cobra con sufrimiento exhibido.",
-    "En {ctx}, el sacrificio exige un aplauso invisible.",
-    "En {ctx}, la víctima se viste de héroe para sobrevivir.",
-    "En {ctx}, el dolor presentado como moneda es negocio, no consciencia.",
-    "En {ctx}, cargar con todo es una forma secreta de exigir reconocimiento.",
-    "En {ctx}, el mártir paga con sufrimiento para cobrar atención.",
-    "En {ctx}, decir 'nadie nota' es confirmar que el sufrimiento busca testigo.",
-    "En {ctx}, el sacrificio gratuito no existe; siempre hay un precio emocional.",
-    "En {ctx}, el peso que elegís llevar solo para que vean es un yugo invisible.",
-    "En {ctx}, la víctima se coloca en el centro esperando que el mundo le devuelva su dolor.",
-  ],
-};
-
-function buildTonePrefix(tone, ctx) {
-  const pool = tonePrefixTemplates[tone];
-  if (!pool || pool.length === 0) return "";
-  const template = pickResponse(pool, `prefix_${tone}`);
-  return template.replace("{ctx}", ctx);
-}
-
-const dimensionalFeedback = {
-  "EL RUIDO": [
-    "La atención es el único recurso que no podés recuperar. ¿A qué ruido entregaste hoy tu soberanía?",
-    "El silencio no es ausencia de sonido: es la presencia de tu propia voz. ¿La escuchás entre tanto estímulo?",
-    "Cada notificación que atendés sin intención es un fragmento de tu consciencia entregado a otros. ¿Qué dejarás de alimentar?",
-    "El ruido moderno no grita; susurra con urgencias ajenas hasta que olvidás tu propia dirección. ¿Quién programa tu mañana?",
-    "No hay escasez de tiempo: hay fuga de atención. Nombrá los tres ruidos que robaron tu presencia esta semana.",
-    "Detrás de cada pantalla que abrís sin propósito hay una incomodidad que no querés sentir. Mirala sin mover el dedo.",
-    "El hombre integrado no huye del mundo digital; gobierna su atención en él. ¿Quién posee el mando ahora?",
-    "Un minuto mirando sin hacer nada vale más que una hora reaccionando. Probá respirar antes de tocar la siguiente alerta.",
-    "La civilización entrena máquinas para captar tu mirada. Tu tarea es entrenar la mirada para volver a vos.",
-    "El ruido nunca cesa; cesa tu respuesta automática. ¿Podés elegir el silencio antes de cada clic?",
-  ],
-  "AUTOCONSCIENCIA": [
-    "El espejo no muestra lo que sos; muestra lo que estás dispuesto a ver. ¿Qué parte del reflejo ignorás?",
-    "La autoconsciencia no es autocrítica: es observar sin juzgar al observador. ¿Podés mirar sin absolverte ni condenarte?",
-    "Detrás de cada máscara hay un miedo. ¿Qué miedo sostiene la que usaste hoy?",
-    "Conocerse no es acumular etiquetas; es dejar de creerlas. ¿Qué autodefinición defendiste recién?",
-    "La pregunta más peligrosa no es '¿quién soy?' sino '¿quién gobierna cuando no miro?'. Mirá hacia adentro.",
-    "La mente fabrica continuamente un personaje para sobrevivir. ¿Qué gesto, palabra o silencio de hoy fue pura actuación?",
-    "No hay verdad final de vos: hay una atención que puede presenciar el cambio. ¿Dónde te aferrás a ser alguien?",
-    "El primer paso de la integración es admitir que no te conocés. ¿Qué parte de tu historia preferís no revisar?",
-    "La autoconsciencia duele porque desarma lo que construiste para ser aceptado. Permanece con esa incomodidad.",
-    "No busques una respuesta brillante. Buscá una observación honesta de lo que está ocurriendo ahora.",
-  ],
-  "EL CUERPO Y EL ARRAIGO": [
-    "El cuerpo no miente; acumula lo que la mente se niega a confesar. Volvé al hueso, al músculo, a la respiración.",
-    "Habitas la mente y abandonás la materia. El hombre integrado arraiga su consciencia en sus actos físicos cotidianos.",
-    "La tensión que ignorás hoy se convertirá en la enfermedad de mañana. Escuchá el mensaje biológico de tu resistencia.",
-    "El arraigo no es un lugar; es la capacidad de sentir el peso del propio cuerpo sin huir. ¿Sentís los pies ahora?",
-    "Cuando la mente se acelera, la respiración se vuelve corta. La mente sigue al cuerpo. Cambiá el ritmo.",
-    "Cada movimiento consciente es una rebelión contra la distracción. ¿Cuál fue tu último acto físico pleno?",
-    "El cuerpo sabe antes que la mente. ¿Qué sensación física apareció mientras leías la pregunta?",
-    "No necesitás más técnicas: necesitás volver a tu respiración profunda y sostenerla diez segundos.",
-    "El hombre integrado no vive en la cabeza; camina, come, respira y descansa con presencia. Elegí un acto cotidiano para habitarlo.",
-    "La materia es sabia. Tu cuerpo grita lo que tu ideología calla. Prestale atención sin traducirlo a palabras.",
-  ],
-  "LA SOMBRA": [
-    "La sombra no se combate: se ilumina con honestidad. ¿Qué parte oscura estás dispuesto a nombrar?",
-    "Lo que negás en vos, lo proyectás sobre el otro. ¿Qué cualidad criticaste hoy que habita en tu interior?",
-    "El demonio interno no es enemigo: es guardián de lo reprimido. ¿Qué mensaje trae?",
-    "Tu repulsa por ciertos comportamientos es un espejo. ¿A quién juzgaste con demasiada intensidad?",
-    "La sombra crece en secreto y cobra intereses. Cada secreto no confesado pesa el doble. Nombrá uno.",
-    "No tenés que amar lo oscuro; solo dejar de negarlo. ¿Qué emoción prohibiste sentir recientemente?",
-    "El ego más peligroso es aquel que se niega a ver su propia violencia. ¿Cómo se expresa la tuya?",
-    "Todo lo que reprimís busca una salida. A veces se viste de enfermedad, a veces de rabia. ¿Dónde sale lo tuyo?",
-    "Integrar la sombra es devolverle su nombre sin dejar que gobierne. ¿Qué nombre le pondrías hoy?",
-    "Aquello que más rechazás en los otros suele ser lo que más miedo te da reconocer en vos. Mirá con valentía.",
-  ],
-  "LAS RELACIONES": [
-    "El otro es siempre un espejo de aquello que no has integrado en vos. ¿Qué parte de tu propia sombra estás culpando en el vínculo?",
-    "La vulnerabilidad exige la muerte del orgullo. ¿Qué preferís tener: la razón o la paz de la integración?",
-    "Proyectás tus carencias esperando que el otro las resuelva. Nadie puede sostener el peso de tu vacío.",
-    "El amor real no nace del contrato invisible. ¿Qué expectativa no nombrada estás cobrando al otro?",
-    "No necesitás ser comprendido para ser fiel a vos mismo. ¿A quién intentás convencer hoy?",
-    "Cada vínculo roto comienza por una proyección no observada. ¿Qué pusiste en el otro que solo vos podés llenar?",
-    "La soledad que temés no es falta de gente, es falta de presencia con vos. No la cures con relaciones.",
-    "El orgullo es el impuesto que pagamos para no pedir perdón. ¿Qué puerta cerraste por no querer doblarte?",
-    "El otro no te abandona: a veces simplemente deja de sostener tu sombra. ¿Qué parte de vos se derrumba sin él?",
-    "Relacionarse desde la integridad implica dejar de negociar afecto por validación. ¿Qué precio pagás por ser querido?",
-  ],
-  "EL PODER PERSONAL": [
-    "El poder no se pide ni se negocia; se ejerce asumiendo las consecuencias. ¿Qué excusa te mantiene esperando permiso?",
-    "La indecisión es una decisión disfrazada de espera. ¿A qué fracaso le temés más que al propio estancamiento?",
-    "El poder personal colapsa cuando buscás que el entorno valide tu siguiente paso. Actuá sin red.",
-    "Delegar la responsabilidad es delegar el poder. ¿Qué decisión seguís postergando por miedo?",
-    "El verdadero poder no domina a otros; domina tu propia reacción. ¿Quién controla tu temperamento hoy?",
-    "No podés construir soberanía esperando aprobación. El primer paso es aceptar el costo de ser dueño de tu elección.",
-    "El miedo a fallar es, en realidad, miedo a responsabilizarse. ¿Qué asumirías si nadie observara?",
-    "El poder se mide en la calma con la que ejecutás decisiones impopulares. ¿Dónde elegís comodidad antes que verdad?",
-    "Esperar condiciones perfectas es una forma sofisticada de no actuar. Nombrá un paso que podrías dar hoy.",
-    "El hombre integrado no busca permiso; construye su propio mandato y paga sus propias consecuencias.",
-  ],
-  "EL DINERO Y EL VALOR": [
-    "El dinero mide circulación, no valía. ¿Estás confundiendo precio con valor propio?",
-    "La escasez que temés es, a menudo, la escasez de reconocimiento hacia tu propio trabajo. ¿Qué valor no te atrevés a cobrar?",
-    "El verdadero capital es la integridad de tu palabra y la claridad de tu dirección. ¿En qué has invertido hoy?",
-    "Perseguir dinero para tapar un vacío solo amplía el vacío. ¿Qué herida pretendés sanar con cifras?",
-    "El dinero es energía. Si tu relación con él está basada en miedo, el miedo es lo que multiplicás. Mirá tu historia.",
-    "Cobrar lo que valés no es avaricia; es honestidad con tu tiempo y tu atención. ¿Dónde subestimás tu precio?",
-    "La abundancia no llega a quien más desea; llega a quien más confía en dar sin perderse. ¿Dás desde la carencia o desde la plenitud?",
-    "Gastar para impresionar es endeudar el alma. ¿Qué compra reciente fue una transacción de validación?",
-    "El hombre integrado no rehúye el dinero: lo usa como herramienta de dirección, no como medida de identidad.",
-    "El valor real no se negocia en mercados. Se construye con coherencia entre lo que decís, hacés y cobrás.",
-  ],
-  "EL SILENCIO": [
-    "El silencio asusta porque desenmascara el ruido con el que te anestesiás. Sostení el vacío sin intentar llenarlo.",
-    "Hacer no es sinónimo de ser. ¿Podés permanecer diez minutos contemplando tu mente sin intervenir en ella?",
-    "El verdadero refugio no está en los lugares silenciosos, sino en tu capacidad de mantener la calma en medio del caos.",
-    "El silencio no es huida: es el campo donde la verdad se asienta. ¿Te atrevés a quedarte quieto?",
-    "La mente te ofrecerá mil urgencias para evitar el vacío. No respondas. Observá.",
-    "En el silencio, las máscaras se caen solas. No hay que arrancarlas. Sostén la quietud.",
-    "El ruido interior es más violento que el exterior. El silencio lo disuelve, no lo combate.",
-    "Hacer diez minutos de nada no es tiempo perdido; es recuperación de soberanía. Empezá ahora.",
-    "El hombre integrado no necesita que el mundo se calle; puede permanecer atento sin reaccionar.",
-    "Cada vez que huyás del silencio, huyés de lo único que no puede mentir: tu propia presencia.",
-  ],
-  "LA DISCIPLINA": [
-    "La disciplina basada en el castigo o en el odio a uno mismo siempre fenece. ¿Podés elegir tu dirección desde el amor y el respeto al proceso?",
-    "No necesitás más fuerza de voluntad; necesitás dejar de negociar con tus propias excusas cotidianas.",
-    "La constancia sin presencia es solo automatismo mecánico. ¿Estás presente en el hábito que sostenés?",
-    "La rigidez es solo otra forma de miedo. La disciplina real fluye, no se quiebra.",
-    "El hábito que sacrifica el descanso termina sacrificando también la calidad. ¿Dónde confundís esfuerzo con destrucción?",
-    "La disciplina no grita. Se levanta todos los días, hace lo que corresponde y deja el resultado en paz.",
-    "Castigarte no te hace más fuerte; te hace más rígido y más frágil. ¿Podés entrenar sin odio?",
-    "El verdadero orden nace de una dirección clara, no de una lista interminable. ¿Cuál es tu norte hoy?",
-    "Cada excusa que aceptás sin cuestionarla te vuelve un poco más ciego. Nombrá la excusa del día.",
-    "La disciplina del hombre integrado es presencia repetida, no violencia contra sí mismo.",
-  ],
-  "EL LIDERAZGO": [
-    "Un verdadero líder no busca aplausos ni seguidores, sino coherencia en la sombra. ¿Qué harías si nadie jamás supiera de tu acierto?",
-    "El liderazgo externo es un eco del desorden interno. Ordená tu caos antes de intentar guiar a otros.",
-    "La popularidad es la tumba de la integridad. ¿Estás dispuesto a ser incomprendido por mantenerte fiel a tu centro?",
-    "Liderar es servir a una dirección, no controlar personas. ¿A qué servís con tu autoridad?",
-    "El líder que necesita ser amado genera dependencia. El que ama la verdad genera libertad. ¿Cuál sos?",
-    "La mejor enseñanza no es lo que decís: es la coherencia entre lo que decís y lo que hacés en privado.",
-    "Quien lidera desde el ego multiplica sufragios; quien lidera desde la integridad multiplica responsabilidad.",
-    "El silencio de un líder vale más que sus discursos. ¿Cuándo escuchás antes de actuar?",
-    "El verdadero liderazgo cuesta: implica decir no a quienes quieren que digas sí. ¿Qué no estás dispuesto a traicionar?",
-    "El hombre integrado no lidera para ser grande; lidera para que otros descubran su propia grandeza.",
-  ],
-  "LAS EXPECTATIVAS": [
-    "Cada expectativa no expresada es un contrato invisible que el otro nunca firmó. ¿Qué trato pretendés sin haberlo nombrado?",
-    "Morir a las expectativas no es rendirse: es liberar la vida de tus condiciones. ¿A qué resultado aferrás que te roba el presente?",
-    "El sufrimiento empieza donde las expectativas chocan con la realidad. ¿Qué realidad estás negando?",
-    "Esperar sin acuerdo es planear resentimiento. ¿Cuántos resentimientos estás sembrando hoy?",
-    "No es el otro quien te decepciona: es tu propia fantasía la que se rompe. ¿Qué guion le escribiste?",
-    "Liberarte de las expectativas no significa no exigirte; significa no hipotecar tu paz a resultados.",
-    "La expectativa es una forma sutil de controlar el futuro. ¿Podés dejar que la vida responda sin guion?",
-    "Cada 'debería ser así' es una pequeña prisión. ¿Cuántas celdas construiste hoy?",
-    "El hombre integrado no deja de aspirar; deja de condicionar su paz a que los demás cumplan su parte.",
-    "La verdadera libertad comienza cuando aceptás que el mundo no firmó tu contrato emocional.",
-  ],
-  "LA INTEGRACION FINAL": [
-    "El ego busca una línea de llegada definitiva para descansar. La integración es un estado de atención perpetua, no un título.",
-    "Aceptar que sos un trabajo en progreso implica dejar de buscar la perfección ilusoria. Asumí tu humanidad descarnada.",
-    "La obra no termina con una respuesta brillante. El verdadero trabajo comienza al cerrar esta pantalla y volver al mundo.",
-    "No hay capítulo final: hay una vida vivida con mayor coherencia. ¿Estás dispuesto a caminar sin certezas?",
-    "La integración no es equilibrio perfecto; es caerse, levantarse y seguir mirando. ¿Cuántas veces más lo intentarás?",
-    "No hay diploma de hombre integrado. Solo hay la pregunta honesta en cada cruce del día.",
-    "El ego querrá usar este proceso para sentirse superior. Repetí: no hay nada que lograr, solo algo que observar.",
-    "La verdadera prueba ocurre en la conversación incómoda, en la respiración difícil, en el silencio del tránsito. Vivíla.",
-    "Cada vez que creas que llegaste, el espejo se empaña. Mantenelo limpio con la humildad de seguir aprendiendo.",
-    "El hombre integrado no es un destino: es una dirección elegida una y otra vez, sin aplausos ni rendición.",
-  ],
-};
-
-const defaultPool = [
-  "El conocimiento sin observación es solo acumulación de ruido. Sostén esta verdad en silencio: ¿podés aceptar este fragmento de tu sombra sin juzgarlo ni justificarlo?",
-  "Has puesto tu verdad sobre la mesa. Mirala sin intentar corregirla, sin juzgarla, sin absolverla. ¿Qué te devuelve el reflejo?",
-  "La mente busca conclusiones rápidas para calmar la incomodidad. Rompé el ciclo: observá tu respuesta sin absolverte ni condenarte.",
-  "Ninguna IA puede resolver lo que solo el observador interno debe presenciar. Permanece con lo que acabas de escribir durante diez segundos sin moverte.",
-  "El espejo no tiene opinión; solo devuelve lo que le entregás. ¿Qué hacés ahora con lo que viste?",
-  "La pregunta que evitás contiene la respuesta que el espejo guarda. Mirala sin traducirla.",
-  "Ninguna explicación externa reemplaza el acto de sostener lo que sentís.",
-  "El espejo no juzga; solo refleja. ¿Qué hacés con lo que ahora ves?",
-  "Lo que escribiste es un punto de partida, no una sentencia. Observalo sin huir.",
-  "La verdad que entregaste no necesita ser arreglada; necesita ser presenciada.",
-];
-
-const superficialPool = [
-  "La brevedad es otra forma de huir del espejo. Nombrá los hechos con precisión quirúrgica. ¿Qué es lo que verdaderamente temés mirar?",
-  "Una respuesta tan corta revela prisa por cerrar el portal. Detente. ¿Qué hay debajo de esa línea apresurada?",
-  "El silencio es sabio, pero el tuyo ahora es evasión. Escribí lo que tu mente calla por vergüenza.",
-  "Esa frase apretada es una puerta que querés dejar cerrada. Empujala: ¿qué hay al otro lado?",
-  "Huir del lenguaje no te libera. Nombrá el hecho con la crudeza que merece.",
-  "La respuesta corta es una máscara. ¿Qué hay detrás de ella?",
-  "El espejo no acepta monedas de cobre por oro. Entregá lo que pesa.",
-  "Dos palabras no nombran un mundo. Extendé la mano hacia lo incómodo.",
-  "Cada palabra que omitís es una sombra que se queda sin luz. Escribila.",
-  "No hay prisa. El espejo puede esperar, pero tu evasión no se esconde.",
-];
 
 const tonePatterns = {
   justification: [
@@ -314,26 +82,393 @@ const tonePatterns = {
 };
 
 function scoreTone(patternList, text) {
-  return patternList.reduce((sum, { regex, weight }) => sum + (regex.test(text) ? weight : 0), 0);
+  return patternList.reduce(
+    (sum, { regex, weight }) => sum + (regex.test(text) ? weight : 0),
+    0,
+  );
 }
 
-export function analyzeUserResponse(dimension, questionText, inputText) {
-  const dimensionKey = normalizeKey(dimension);
-  const text = removeAccents(inputText.toLowerCase().trim());
+const doctrinePremises = [
+  "La primera ley del Hombre Integrado dice: antes de aumentar el poder de un ser hay que observar cómo usa ese amplificador y su memoria.",
+  "La civilización hipertecnológica entrenó máquinas para el trabajo y la velocidad, pero atrofió la presencia del ser humano.",
+  "El espejo no miente: solo devuelve lo que se le entrega sin maquillaje.",
+  "No hay destino final, solo una dirección elegida una y otra vez con atención.",
+  "El cuerpo y la mente son un solo territorio; dividirlos es el primer ruido.",
+  "El ego sobrevive construyendo coartadas, intelectualizaciones y sacrificios invisibles.",
+  "La integración no es un título; es un estado de atención perpetua.",
+  "La sombra no se combate, se ilumina; no se niega, se nombra.",
+  "El silencio real no está en el lugar, sino en la calma que podés sostener dentro del caos.",
+  "El verdadero poder no domina a otros; domina la propia reacción.",
+  "La felicidad no es una meta; es el subproducto de una dirección coherente.",
+  "Cada distracción es un fragmento de soberanía entregado a alguien que no va a devolverlo.",
+];
 
-  if (!text) {
-    return { type: "SILENCIO", response: "El espejo solo puede devolver lo que se entrega." };
+const toneMechanisms = {
+  justification: [
+    "El ego externaliza la causa para no cargar con el peso.",
+    "Buscás una coartada en el entorno antes de asumir tu centro.",
+    "El relato culpa al sistema mientras tu poder se escapa por la puerta de atrás.",
+    "Cada 'porque' es un cable que delega tu responsabilidad a factores ajenos.",
+    "Decir que no depende de vos es elegir la impotencia como refugio.",
+    "La circunstancia solo revela dónde aún no te has hecho cargo.",
+    "El entorno no se mueve hasta que vos dejás de esperar su permiso.",
+    "Justificar es construir una celda con las palabras 'no pude'.",
+    "La culpa compartida con el sistema es responsabilidad negada.",
+    "El relato que construís externaliza el conflicto para protegerte.",
+    "Antes de aumentar tu poder, estás usando el amplificador para excusarte.",
+    "El ruido digital se convierte en coartada cuando no querés escuchar el silencio.",
+  ],
+  intellectualization: [
+    "La mente confunde el mapa con el territorio.",
+    "Los conceptos abstractos armaron una muralla alrededor de la herida.",
+    "Explicar se volvió estrategia para no sentir.",
+    "La teoría se erige como túnel por donde huir del cuerpo.",
+    "Cada concepto que agregás es otra capa que separa la mirada del hecho.",
+    "Filosofar sobre el dolor es una forma elegente de no tocarlo.",
+    "El intelecto ordena para no dejarse desordenar por lo real.",
+    "Nombrar el trauma con palabras ricas no lo disuelve; lo distrae.",
+    "El análisis infinito es el ruido que la herida pone para no ser sentida.",
+    "Construís un lenguaje privado para habitar la herida sin curarla.",
+    "La mente teórica analiza para no sentir y para no actuar.",
+    "El mapa cada vez más detallado nunca reemplaza al territorio.",
+  ],
+  martyr: [
+    "El ego se cobra con sufrimiento exhibido.",
+    "El sacrificio exige un aplauso invisible.",
+    "La víctima se viste de héroe para sobrevivir.",
+    "Cargar con todo es una forma secreta de exigir reconocimiento.",
+    "El mártir paga con sufrimiento para cobrar atención.",
+    "El peso que elegís llevar solo para que vean es un yugo invisible.",
+    "El dolor presentado como moneda es comercio, no consciencia.",
+    "Te colocás en el centro del drama para exigir aplausos que nadie prometió.",
+    "El sufrimiento exhibido como moneda de cambio es vanidad sutil.",
+    "Decir 'nadie nota' es confirmar que el sufrimiento busca testigo.",
+    "El sacrificio gratuito no existe; siempre hay un precio emocional.",
+    "Aguantar para que admiren tu resistencia es seguir dependiendo del otro.",
+  ],
+  superficial: [
+    "La brevedad es otra forma de huir del espejo.",
+    "Una respuesta tan corta revela prisa por cerrar el portal.",
+    "El silencio es sabio, pero el tuyo ahora es evasión.",
+    "Esa frase apretada es una puerta que querés dejar cerrada.",
+    "Huir del lenguaje no te libera; solo pospone el encuentro.",
+    "La respuesta corta es una máscara que oculta el hecho.",
+    "El espejo no acepta monedas de cobre por oro.",
+    "Dos palabras no nombran un mundo.",
+    "Cada palabra que omitís es una sombra que se queda sin luz.",
+    "La prisa por cerrar es miedo a lo que aparece si te quedás.",
+    "El lenguaje mínimo es defensa cuando la verdad pesa demasiado.",
+    "No hay prisa: el espejo puede esperar, pero tu evasión no se esconde.",
+  ],
+  neutral: [
+    "El espejo devuelve lo que le entregás, sin corregir ni absolver.",
+    "La observación honesta vale más que la respuesta brillante.",
+    "La mente busca conclusiones rápidas para calmar la incomodidad.",
+    "Ninguna IA puede resolver lo que solo el observador interno debe presenciar.",
+    "Has puesto tu verdad sobre la mesa; ahora solo hace falta mirarla.",
+    "La integración es un estado de atención, no un título que conquistar.",
+    "El conocimiento sin observación es solo acumulación de ruido.",
+    "Permanece con lo que escribiste diez segundos sin moverte.",
+    "La verdad que entregaste no necesita ser arreglada; necesita ser presenciada.",
+    "El espejo no juzga; solo refleja.",
+    "Lo que escribiste es un punto de partida, no una sentencia.",
+    "La pregunta que evitás contiene la respuesta que el espejo guarda.",
+  ],
+};
+
+const toneDirectives = {
+  justification: [
+    "Asumí el centro de tu propia gravedad en {ctx}.",
+    "Dejá de delegar el poder a factores ajenos.",
+    "Reclamá la responsabilidad que le regalaste al entorno.",
+    "Nombrá lo que evitás asumir.",
+    "Cortá el cable que conecta tu excusa con el mundo.",
+    "Volvé a tu cuerpo y sentí el peso de tu propia elección.",
+    "Pará de buscar permiso o culpables para actuar.",
+    "Hacete cargo del amplificador antes de exigir más potencia.",
+    "Convertí la queja en una pregunta de responsabilidad.",
+    "Mirá cómo usás tu memoria: ¿está sirviendo a tu dirección o a tu defensa?",
+  ],
+  intellectualization: [
+    "Bajá del mapa al territorio de {ctx}.",
+    "Dejá los conceptos y tocá el hecho físico y descarnado.",
+    "Descendé de la teoría a la sensación.",
+    "Permití que la herida exista sin explicación.",
+    "Traducí el pensamiento a una acción concreta en {ctx}.",
+    "Sentí la pregunta en el cuerpo antes de responderla.",
+    "Interrumpí el análisis con un acto de presencia.",
+    "Hablá con la simplicidad de un hecho desnudo.",
+    "Dejá las citas y volvé al territorio de tu propia experiencia.",
+    "La teoría no reemplaza la observación; la observa desde arriba.",
+  ],
+  martyr: [
+    "Hacé esto sin que nadie jamás lo note.",
+    "Dejá de cobrar con sufrimiento.",
+    "Soltá la cruz que elegiste como moneda de cambio.",
+    "Mirá qué necesidad de validación camufla tu sacrificio.",
+    "Actuá desde la plenitud, no desde la deuda.",
+    "Pagá el precio emocional sin esperar recibo.",
+    "Hacé lo que corresponde sin anunciarlo.",
+    "Reclamá tu soberanía en lugar de tu dolor.",
+    "Decidí si el sacrificio es amor o contrato invisible.",
+    "El hombre integrado da sin exigir que el mundo lo vea.",
+  ],
+  superficial: [
+    "Nombrá los hechos con precisión quirúrgica.",
+    "Extendé la mano hacia lo incómodo.",
+    "Escribí lo que tu mente calla por vergüenza.",
+    "Detenete y sostené la mirada un minuto más.",
+    "Abrí la puerta que querés dejar cerrada.",
+    "Soltá la prisa y dejá que la verdad pese.",
+    "Volvé a la pregunta y respondela con el cuerpo, no con una etiqueta.",
+    "Escribí una línea que no estés dispuesto a mostrar.",
+    "Descendé del resumen al hecho concreto.",
+    "No cierres el portal hasta que haya algo real en la mesa.",
+  ],
+  neutral: [
+    "Sostén esta verdad en silencio.",
+    "Observá tu respuesta sin absolverte ni condenarte.",
+    "Permanece con lo que escribiste durante diez segundos sin moverte.",
+    "Mirá lo que surge sin intentar corregirlo.",
+    "Volvé a la pregunta y dejala resonar en el cuerpo.",
+    "Aceptá este fragmento de tu sombra sin juzgarlo ni justificarlo.",
+    "Dejá que el reflejo hable antes de responder por él.",
+    "Rompe el ciclo de conclusiones rápidas.",
+    "Presenciá lo que escribiste como si fuera de otro.",
+    "La atención es el único recurso que no podés recuperar: usala aquí.",
+  ],
+};
+
+const toneQuestions = {
+  justification: [
+    "¿Qué decisión estás delegando?",
+    "¿Qué parte de esta situación depende exclusivamente de vos?",
+    "¿A qué le temés más que a asumir el centro?",
+    "¿Qué excusa te mantiene esperando permiso?",
+    "¿Qué responsabilidad estás intentando delegar?",
+    "¿Qué pasaría si asumieras que el origen está íntegramente en vos?",
+    "¿Quién o qué pierde poder si dejás de culpar?",
+    "¿Qué elegís hacer hoy con la parte que sí depende de vos?",
+    "¿Dónde dejaste el mando de tu atención?",
+    "¿Qué mentira contás para no actuar?",
+  ],
+  intellectualization: [
+    "¿Qué sensación física aparece si dejás de explicar?",
+    "¿Podés dejar de analizar y simplemente sentirlo?",
+    "¿Qué nombre desnudo le pondrías al hecho?",
+    "¿Dónde está tu cuerpo mientras teorizás?",
+    "¿Qué ocurre si bajás del mapa al territorio?",
+    "¿Qué pasaría si no tuvieras palabras para describir esto?",
+    "¿Qué parte de tu teoría es pura defensa?",
+    "¿Sentís la pregunta o solo la pensás?",
+    "¿Qué acción concreta surge si abandonás el concepto?",
+    "¿Qué harías si nadie valorara tu análisis?",
+  ],
+  martyr: [
+    "¿Qué necesidad de validación camufla este sacrificio?",
+    "¿Qué harías si nadie jamás supiera de tu entrega?",
+    "¿Cuándo empezó este peso a cobrarse con atención?",
+    "¿Qué precio emocional estás exigiendo?",
+    "¿Podés dar sin esperar que lo noten?",
+    "¿Qué parte de tu dolor es moneda de cambio?",
+    "¿Quién debería pagar lo que vos estás pagando?",
+    "¿Qué pasaría si soltás la cruz?",
+    "¿Tu sacrificio es amor o contrato invisible?",
+    "¿De quién depende tu valía hoy?",
+  ],
+  superficial: [
+    "¿Qué es lo que verdaderamente temés mirar?",
+    "¿Qué hay debajo de esa línea apresurada?",
+    "¿Qué escribiría una versión tuya sin miedo?",
+    "¿Qué hecho evitás nombrar?",
+    "¿Por qué cerrás el portal con tan pocas palabras?",
+    "¿Qué ocurre si escribís cinco líneas más?",
+    "¿Qué vergüenza oculta tu brevedad?",
+    "¿Qué tendría que ser real para que te quedaras?",
+    "¿Qué hay al otro lado de la puerta?",
+    "¿Qué parte del espejo te asusta?",
+  ],
+  neutral: [
+    "¿Qué te devuelve el reflejo?",
+    "¿Podés aceptar este fragmento sin juzgarlo?",
+    "¿Qué ocurre si permanecés diez segundos con esto?",
+    "¿Qué dirección emerge de esta observación?",
+    "¿Qué hacés ahora con lo que viste?",
+    "¿Qué parte de vos apareció que no esperabas?",
+    "¿Qué pregunta subyace debajo de tu respuesta?",
+    "¿Cómo se siente esta verdad en el cuerpo?",
+    "¿Qué decisión coherente nace de aquí?",
+    "¿Dónde aplicarás lo que observaste hoy?",
+  ],
+};
+
+const dimensionAnchors = {
+  "EL RUIDO": [
+    "el ruido digital no es un ambiente, es una decisión repetida",
+    "cada alerta que atendés sin intención roba un fragmento de tu soberanía",
+    "la tecnología es un amplificador; mirá qué amplifica en vos",
+    "el cuerpo pide silencio mientras la pantalla exige respuesta",
+    "la atención es el único recurso que no recuperás",
+  ],
+  "AUTOCONSCIENCIA": [
+    "la autoconsciencia no es autocrítica, es observar al observador",
+    "la máscara que defendiste hoy es una puerta",
+    "detrás de cada personaje hay un miedo",
+    "conocerse es dejar de creer las etiquetas",
+    "el espejo no miente, solo refleja",
+  ],
+  "EL CUERPO Y EL ARRAIGO": [
+    "el cuerpo grita lo que la mente niega",
+    "el arraigo no es un lugar, es sentir el peso del propio cuerpo",
+    "la respiración es el primer territorio de la presencia",
+    "cada movimiento consciente es una rebelión contra la distracción",
+    "la materia es sabia y no se deja engañar por palabras",
+  ],
+  "LA SOMBRA": [
+    "la sombra no se combate, se ilumina",
+    "lo que negás en vos lo proyectás sobre el otro",
+    "cada secreto no confesado pesa el doble",
+    "el demonio interno es guardián de lo reprimido",
+    "integrar la sombra es devolverle su nombre sin dejar que gobierne",
+  ],
+  "LAS RELACIONES": [
+    "el otro es espejo de lo que no integraste",
+    "el vínculo roto comienza en una proyección no observada",
+    "la soledad que temés es falta de presencia con vos",
+    "el orgullo es el impuesto que pagamos para no pedir perdón",
+    "relacionarse con integridad implica dejar de negociar afecto",
+  ],
+  "EL PODER PERSONAL": [
+    "el poder no se pide, se ejerce asumiendo consecuencias",
+    "la indecisión es una decisión disfrazada de espera",
+    "delegar responsabilidad es delegar poder",
+    "el miedo a fallar es miedo a responsabilizarse",
+    "el poder se mide en la calma de decisiones impopulares",
+  ],
+  "EL DINERO Y EL VALOR": [
+    "el dinero mide circulación, no valía",
+    "gastar para impresionar es endeudar el alma",
+    "el valor real no se negocia en mercados",
+    "cobrar lo que valés no es avaricia, es honestidad",
+    "el dinero es energía; si tu relación con él tiene miedo, el miedo se multiplica",
+  ],
+  "EL SILENCIO": [
+    "el silencio asusta porque desenmascara el ruido",
+    "hacer no es sinónimo de ser",
+    "el verdadero refugio es la calma dentro del caos",
+    "la mente ofrece urgencias para evitar el vacío",
+    "el silencio disuelve el ruido, no lo combate",
+  ],
+  "LA DISCIPLINA": [
+    "la disciplina real fluye, no se quiebra",
+    "castigarte no te hace más fuerte, te hace más frágil",
+    "la constancia sin presencia es automatismo",
+    "la rigidez es otra forma de miedo",
+    "la disciplina es presencia repetida, no violencia contra uno mismo",
+  ],
+  "EL LIDERAZGO": [
+    "liderar es servir a una dirección, no controlar personas",
+    "el líder que necesita ser amado genera dependencia",
+    "la mejor enseñanza es la coherencia entre lo privado y lo público",
+    "el silencio de un líder vale más que sus discursos",
+    "el hombre integrado no lidera para ser grande",
+  ],
+  "LAS EXPECTATIVAS": [
+    "cada expectativa no expresada es un contrato invisible",
+    "morir a las expectativas no es rendirse, es liberar la vida",
+    "el sufrimiento empieza donde la expectativa choca con la realidad",
+    "la expectativa es una forma sutil de controlar el futuro",
+    "el mundo no firmó tu contrato emocional",
+  ],
+  "LA INTEGRACION FINAL": [
+    "la integración no es una meta, es una dirección",
+    "no hay diploma de hombre integrado",
+    "cada vez que creas que llegaste, el espejo se empaña",
+    "el trabajo verdadero empieza al cerrar esta pantalla",
+    "la integración es caerse, levantarse y seguir mirando",
+  ],
+};
+
+const responseTemplates = {
+  justification: [
+    "{premise} {mechanism} {directive} {question}",
+    "{mechanism} {premise} {directive} {question}",
+    "{directive} {mechanism} En {ctx}, {question}",
+    "{premise} {directive} {mechanism} {question}",
+    "{mechanism} {question} {directive} {premise}",
+    "En {ctx}, {mechanism} {directive} {question}",
+  ],
+  intellectualization: [
+    "{premise} {mechanism} {directive} {question}",
+    "{mechanism} {premise} {directive} {question}",
+    "{directive} {mechanism} {question} {premise}",
+    "{premise} {directive} {mechanism} {question}",
+    "En {ctx}, {mechanism} {directive} {question}",
+    "{mechanism} {directive} Dejá el mapa: {question}",
+  ],
+  martyr: [
+    "{premise} {mechanism} {directive} {question}",
+    "{mechanism} {premise} {directive} {question}",
+    "{directive} {mechanism} {question} {premise}",
+    "{premise} {directive} {mechanism} {question}",
+    "En {ctx}, {mechanism} {directive} {question}",
+    "{mechanism} {question} Hacé el siguiente paso en silencio.",
+  ],
+  superficial: [
+    "{mechanism} {directive} {question}",
+    "{directive} {mechanism} {question}",
+    "{mechanism} En {ctx}, {directive} {question}",
+    "{premise} {mechanism} {directive} {question}",
+    "{directive} {question} {mechanism}",
+    "{question} {mechanism} {directive}",
+  ],
+  neutral: [
+    "{premise} En {ctx}, {anchor}. {directive} {question}",
+    "En {ctx}, {anchor}. {directive} {question}",
+    "{anchor}. {premise} {directive} {question}",
+    "{directive} En {ctx}, {anchor}. {question}",
+    "{question} {anchor}. {directive} {premise}",
+    "{premise} {directive} En {ctx}, {anchor}. {question}",
+  ],
+};
+
+let previousResponse = "";
+
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function startLower(str) {
+  return str.replace(/^(¿|¡)?([A-ZÁÉÍÓÚÑ])/, (_, punct, letter) =>
+    (punct || "") + letter.toLowerCase(),
+  );
+}
+
+function normalizeCasing(str) {
+  // Ensure the first sentence and every sentence after . ? ! start with uppercase.
+  return str.replace(/(^|[.?!]\s+)(¿|¡)?([a-záéíóúñ])/g, (_, boundary, punct, letter) =>
+    boundary + (punct || "") + letter.toUpperCase(),
+  );
+}
+
+function buildToneLabel(tone) {
+  switch (tone) {
+    case "justification":
+      return "JUSTIFICATION";
+    case "intellectualization":
+      return "INTELLECTUALIZATION";
+    case "martyr":
+      return "MARTYR";
+    case "superficial":
+      return "SUPERFICIAL";
+    default:
+      return "NEUTRAL";
   }
+}
 
-  const words = text.split(/\s+/).filter(Boolean);
-  const wordCount = words.length;
-  const ctx = dimensionContext[dimensionKey] || "esta dimensión";
-
+function resolveTone(dimensionKey, text, wordCount) {
   if (wordCount < 4) {
-    return {
-      type: `${dimensionKey} — SUPERFICIAL`,
-      response: pickResponse(superficialPool, "SUPERFICIAL"),
-    };
+    return { tone: "superficial", ctx: dimensionContext[dimensionKey] || "esta dimensión" };
   }
 
   const scores = {
@@ -342,31 +477,72 @@ export function analyzeUserResponse(dimension, questionText, inputText) {
     martyr: scoreTone(tonePatterns.martyr, text),
   };
 
-  let toneKey = "neutral";
+  let tone = "neutral";
   let maxScore = 0;
   for (const key of ["justification", "intellectualization", "martyr"]) {
     const score = scores[key];
     if (score > maxScore) {
       maxScore = score;
-      toneKey = key;
+      tone = key;
     }
   }
 
-  // Threshold: a strong tone needs at least 4 points to override the dimension context.
   if (maxScore < 4) {
-    toneKey = "neutral";
+    tone = "neutral";
   }
 
-  const pool = dimensionalFeedback[dimensionKey] || defaultPool;
-  const core = pickResponse(pool, dimensionKey);
+  return { tone, ctx: dimensionContext[dimensionKey] || "esta dimensión" };
+}
 
-  let response = core;
-  if (toneKey !== "neutral") {
-    const prefix = buildTonePrefix(toneKey, ctx);
-    if (prefix) response = `${prefix} ${core}`;
+function generateResponse(dimensionKey, ctx, tone) {
+  const premise = pick(doctrinePremises);
+  const mechanism = startLower(pick(toneMechanisms[tone]));
+  const directive = startLower(pick(toneDirectives[tone]).replace("{ctx}", ctx));
+  const question = startLower(pick(toneQuestions[tone]));
+  const anchorList = dimensionAnchors[dimensionKey] || dimensionAnchors["LA INTEGRACION FINAL"];
+  const anchor = startLower(pick(anchorList));
+
+  const template = pick(responseTemplates[tone]);
+  let response = template
+    .replace(/\{premise\}/g, premise)
+    .replace(/\{mechanism\}/g, mechanism)
+    .replace(/\{directive\}/g, directive)
+    .replace(/\{question\}/g, question)
+    .replace(/\{ctx\}/g, ctx)
+    .replace(/\{anchor\}/g, anchor);
+
+  // Collapse multiple spaces and fix Spanish sentence casing.
+  response = response.replace(/\s+/g, " ").trim();
+  response = normalizeCasing(response);
+
+  // Avoid the exact same full response twice in a row.
+  if (response === previousResponse && response.length > 0) {
+    return generateResponse(dimensionKey, ctx, tone);
+  }
+  previousResponse = response;
+  return response;
+}
+
+export function analyzeUserResponse(dimension, questionText, inputText) {
+  const dimensionKey = normalizeKey(dimension);
+  const text = removeAccents(inputText.toLowerCase().trim());
+
+  if (!text) {
+    return {
+      type: "SILENCIO",
+      response: "El espejo solo puede devolver lo que se entrega.",
+    };
   }
 
-  const typeLabel = toneKey === "neutral" ? dimensionKey : `${dimensionKey} — ${toneKey.toUpperCase()}`;
+  const words = text.split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+  const { tone, ctx } = resolveTone(dimensionKey, text, wordCount);
+
+  const response = generateResponse(dimensionKey, ctx, tone);
+  const typeLabel =
+    tone === "neutral"
+      ? dimensionKey
+      : `${dimensionKey} — ${buildToneLabel(tone)}`;
 
   return { type: typeLabel, response };
 }

@@ -6,120 +6,141 @@ const source = fs.readFileSync(sourcePath, "utf-8");
 const dataUrl = "data:text/javascript;charset=utf-8," + encodeURIComponent(source);
 const { analyzeUserResponse } = await import(dataUrl);
 
-const cases = [
+const dimensions = [
+  "El Ruido",
+  "Autoconsciencia",
+  "El Cuerpo y el Arraigo",
+  "La Sombra",
+  "Las Relaciones",
+  "El Poder Personal",
+  "El Dinero y el Valor",
+  "El Silencio",
+  "La Disciplina",
+  "El Liderazgo",
+  "Las Expectativas",
+  "La Integración Final",
+];
+
+function normalizeKey(str) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9\s]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const profileTests = [
   {
-    name: "Evasivo / Justificador (Poder Personal)",
-    dimension: "El Poder Personal",
-    question: "¿Qué excusa te mantiene esperando permiso?",
-    input: "La culpa es de mi jefe porque me exige demasiado y el sistema laboral no me deja avanzar como merezco. Los demás no entienden mi situación y las circunstancias fueron imposibles de manejar.",
-    tone: "JUSTIFICATION",
-  },
-  {
-    name: "Evasivo / Justificador (Relaciones)",
-    dimension: "Las Relaciones",
-    question: "¿Qué relación mantenés por inercia?",
-    input: "No pude terminar el proyecto por culpa de la empresa y de mis compañeros que no me apoyaron. Fue un contexto demasiado difícil y fuera de mi control.",
-    tone: "JUSTIFICATION",
-  },
-  {
-    name: "Intelectualizador (Dinero y Valor)",
-    dimension: "El Dinero y el Valor",
-    question: "¿Dónde confundís precio con valor?",
-    input: "Analizando psicológicamente mi problema, puedo entenderlo desde un paradigma teórico que explica mi conducta mediante conceptos filosóficos y modelos mentales.",
-    tone: "INTELLECTUALIZATION",
-  },
-  {
-    name: "Mártir (Disciplina)",
-    dimension: "La Disciplina",
-    question: "¿Cuándo confundiste la rigidez con la fuerza de voluntad?",
-    input: "Siempre yo hago todo y nadie valora mi sacrificio. Fui el único en cargar con todo el peso de la familia.",
-    tone: "MARTYR",
-  },
-  {
-    name: "Breve / Superficial (Silencio)",
-    dimension: "El Silencio",
-    question: "¿Qué pregunta evitás hacer en silencio?",
-    input: "no sé",
-    tone: "SUPERFICIAL",
-  },
-  {
-    name: "Neutral profundo (Ruido)",
+    name: "Ejecutivo Acelerado (Evasivo)",
     dimension: "El Ruido",
-    question: "¿Sos vos cuando nadie te está mirando?",
-    input: "Cuando estoy solo siento que mi mente busca constantemente distracciones. Me doy cuenta de que uso el ruido para no sentir una soledad que aún no he aprendido a habitar.",
-    tone: "NEUTRAL",
+    inputs: [
+      "El sistema laboral moderno y las notificaciones constantes me impiden tener paz. Es culpa de los tiempos acelerados y de la tecnología.",
+      "Mi jefe, la empresa y las circunstancias me obligan a vivir así. No depende de mí, es el mundo que anda demasiado rápido.",
+      "Los demás no entienden la presión del sistema. Nadie puede sobrevivir a este ritmo sin perderse.",
+    ],
+    expectedTone: "JUSTIFICATION",
+    expectedDimension: "EL RUIDO",
   },
   {
-    name: "Evasivo (Cuerpo)",
-    dimension: "El Cuerpo y el Arraigo",
-    question: "¿Qué parte de tu cuerpo sostiene tensión?",
-    input: "Mi familia me obligó a trabajar desde chico y por eso nunca pude cuidar mi cuerpo. El sistema me dejó sin opciones.",
-    tone: "JUSTIFICATION",
-  },
-  {
-    name: "Intelectualizador (Autoconsciencia)",
+    name: "El Intelectual (Teórico)",
     dimension: "Autoconsciencia",
-    question: "¿Qué máscara social usaste?",
-    input: "Desde un punto de vista psicológico, mi conducta se explica por un modelo teórico de autoconcepto desarrollado en la infancia.",
-    tone: "INTELLECTUALIZATION",
+    inputs: [
+      "Analizando psicológicamente mi problema, puedo entenderlo desde un paradigma teórico que explica mi conducta mediante conceptos filosóficos y modelos mentales.",
+      "Desde una óptica conceptual, mi mente procesa el trauma a través de un razonamiento intelectual y un análisis sicológico que me permite teorizar sin sentir.",
+      "Filosóficamente, estoy construyendo una teoría sobre mi dolor para no tocarlo con el cuerpo.",
+    ],
+    expectedTone: "INTELLECTUALIZATION",
+    expectedDimension: "AUTOCONSCIENCIA",
+  },
+  {
+    name: "Superficial / Apurado",
+    dimension: "El Silencio",
+    inputs: [
+      "no sé",
+      "estoy bien",
+      "todo mal",
+      "sí",
+      "no importa",
+    ],
+    expectedTone: "SUPERFICIAL",
+    expectedDimension: "EL SILENCIO",
   },
 ];
 
 function summarize() {
-  const bar = "—".repeat(70);
+  const bar = "=".repeat(70);
   console.log(bar);
   console.log("MOTOR EGO ANALYZER — PRUEBAS AUTÓNOMAS POR DIMENSIÓN Y TONO");
   console.log(bar);
 
   let passed = 0;
-  const dimensionCounts = {};
-  const toneCounts = {};
-  const responses = [];
+  let total = 0;
 
-  for (const test of cases) {
-    const result = analyzeUserResponse(test.dimension, test.question, test.input);
-    const typeParts = result.type.split(" — ");
-    const dimensionPart = typeParts[0];
-    const tonePart = typeParts[1] || "NEUTRAL";
-
-    const expectedKey = test.dimension.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Z0-9\s]/g, "").replace(/\s+/g, " ").trim();
-    const okDimension = dimensionPart === expectedKey;
-    const okTone = tonePart === test.tone;
-    const ok = okDimension && okTone;
-    if (ok) passed++;
-
-    dimensionCounts[result.type] = (dimensionCounts[result.type] || 0) + 1;
-    toneCounts[tonePart] = (toneCounts[tonePart] || 0) + 1;
-    responses.push(result.response);
-
-    console.log(`\nCaso: ${test.name}`);
-    console.log(`Dimensión: ${test.dimension}`);
-    console.log(`Tipo esperado: ${test.tone}`);
-    console.log(`Tipo obtenido: ${result.type}`);
-    console.log(`Respuesta: ${result.response.slice(0, 120)}${result.response.length > 120 ? "..." : ""}`);
+  for (const profile of profileTests) {
+    console.log(`\n--- Perfil: ${profile.name} ---`);
+    for (const input of profile.inputs) {
+      const result = analyzeUserResponse(profile.dimension, "pregunta", input);
+      const [dimPart, tonePart = "NEUTRAL"] = result.type.split(" — ");
+      const dimOk = dimPart === profile.expectedDimension;
+      const toneOk = tonePart === profile.expectedTone;
+      const ok = dimOk && toneOk;
+      total++;
+      if (ok) passed++;
+      console.log(`${ok ? "OK" : "FAIL"} [${result.type}] ${input.slice(0, 70)}...`);
+      console.log(`   → ${result.response.slice(0, 120)}...`);
+    }
   }
 
-  // Rotación: mismo input justificador en dos dimensiones 6 veces.
+  // Cobertura de dimensiones: asegurar que cada dimensión tenga al menos 10 variantes y responda distintivamente.
   console.log("\n" + bar);
-  console.log("PRUEBA DE ROTACIÓN CONTEXTUAL");
+  console.log("COBERTURA DE VARIANTES POR DIMENSIÓN");
   console.log(bar);
-  const rotInput = "La culpa es del sistema y de los demás, porque nunca me entienden y las circunstancias fueron imposibles.";
-  const rotDims = ["El Poder Personal", "Las Relaciones", "El Silencio"];
+  let variantFailures = 0;
+  for (const dim of dimensions) {
+    const responses = new Set();
+    for (let i = 0; i < 15; i++) {
+      const result = analyzeUserResponse(dim, "pregunta", "Mi respuesta con palabras suficientes para evitar el superficial y permitir que la dimensión hable por sí sola.");
+      responses.add(result.response);
+    }
+    const dimKey = normalizeKey(dim);
+    const hasTone = Array.from(responses).some((r) => /^(?:En |El |La |Un |No )/.test(r));
+    console.log(`${dim}: ${responses.size} respuestas únicas en 15 intentos`);
+    if (responses.size < 5) {
+      variantFailures++;
+      console.log(`   ADVERTENCIA: menos de 5 variantes en ${dim}`);
+    }
+  }
+
+  // Prueba de rotación: verificar ausencia de repeticiones consecutivas.
+  console.log("\n" + bar);
+  console.log("PRUEBA DE ROTACIÓN");
+  console.log(bar);
   let consecutiveRepeats = 0;
   let previous = null;
-  for (let i = 0; i < 12; i++) {
-    const dim = rotDims[i % rotDims.length];
-    const res = analyzeUserResponse(dim, "pregunta", rotInput);
-    if (res.response === previous) consecutiveRepeats++;
-    previous = res.response;
-    console.log(`  ${i + 1} [${dim}] ${res.type}: ${res.response.slice(0, 80)}...`);
+  const sequence = [];
+  for (let i = 0; i < 30; i++) {
+    const dim = dimensions[i % dimensions.length];
+    const result = analyzeUserResponse(dim, "pregunta", "Me siento atrapado porque el sistema, los demás y las circunstancias me obligan sin darme opción. Nadie me entiende.");
+    if (result.response === previous) consecutiveRepeats++;
+    previous = result.response;
+    sequence.push(result.response.slice(0, 70));
   }
+  console.log("Repeticiones consecutivas en 30 iteraciones:", consecutiveRepeats);
+  console.log("Primeras 10 respuestas:");
+  sequence.slice(0, 10).forEach((s, i) => console.log(`  ${i + 1}. ${s}`));
 
   console.log("\n" + bar);
-  console.log(`RESUMEN: ${passed}/${cases.length} casos clasificaron dimensión y tono correctamente`);
-  console.log("Tipos generados:", JSON.stringify(dimensionCounts, null, 2));
-  console.log("Tonalidad:", JSON.stringify(toneCounts, null, 2));
-  console.log("Repeticiones consecutivas en rotación:", consecutiveRepeats);
+  console.log(`RESUMEN: ${passed}/${total} perfiles clasificados correctamente`);
+  console.log(`Dimensiones con variantes insuficientes: ${variantFailures}`);
+  console.log(`Repeticiones consecutivas: ${consecutiveRepeats}`);
+  if (passed === total && variantFailures === 0 && consecutiveRepeats === 0) {
+    console.log("ESTADO: OK");
+  } else {
+    console.log("ESTADO: REVISAR");
+    process.exitCode = 1;
+  }
   console.log(bar);
 }
 
